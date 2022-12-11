@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
+<body>
+<div class="profile" >
+    <div class="dropdown" style="top: 0px;position: absolute;right: 100px;">
+        <button onclick="myFunction()" class="dropbtn">Profile</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a th:href="@{/user/update}">View/Edit Profile</a>
+            <a th:href="@{/book/bookHistory}" style="text-decoration: none; color: black;">Issued Books</a>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container" style="margin-top:50px;">
+    <div class="row">
+        <p th:text="${Message}"></p>
+
+        <div class="col" style="text-align: center;">
+            <form th:action="@{/librarian/}" method = "get" th:object="${search}">
+                <input type="text" id="search" name="search" th:value="${search}">
+                <button type="submit" >Search</button>
+            </form>
+            <button type="submit" ><a th:href="@{/librarian/}" style="text-decoration: none; color: black;">Reset search</a></button>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>ContactNumber</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="librarian: ${librarians}">
+                        <td th:text="${librarian.name}" />
+                        <td th:text="${librarian.emailId}" />
+                        <td th:text="${librarian.contactNumber}" />
+
+
+                        <td> <form th:action="@{/librarian/update}" method="get" >
+                            <input type="int" th:value="${librarian.id}" name="id" hidden><button type="submit"><span class="glyphicon glyphicon-pencil"></span></button></form> </td>
+                        <td> <form th:action="@{/librarian/delete}" method="get" >
+                            <input type="int" th:value="${librarian.id}" name="id" hidden><button type="submit"><span class="glyphicon glyphicon-trash"></span></button></form> </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <button type="submit" ><a th:href="@{/dashboard}" style="text-decoration: none; color: black;">Return to main page?</a></button>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/custom.js"></script>
+</body>
+</html>

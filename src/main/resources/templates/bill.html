@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/pdf-resources/css/bootstrap.min.css"/>
+</head>
+
+<body>
+
+<div class="container" style="margin-top:50px;">
+
+
+    <div class="row">
+        <center><h1> Book Issue Return Invoice</h1></center>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered">
+                <tbody>
+                <tr >
+                    <td class="col-6">User Name</td>
+                    <td class="col-6" th:text="${user.name}" />
+                </tr>
+                <tr>
+                    <td class="col-6">User Email</td>
+                    <td class="col-6" th:text="${user.emailId}" />
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Book Name</th>
+                    <th>Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book, iter: ${books}">
+                    <td th:text="${iter.count}" />
+                    <td th:text="${book.title}" />
+                    <td th:text="${book.pricePerUnit}" />
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col center">
+            Total Price: <span th:text="${books.get(0).pricePerUnit}"></span>
+        </div>
+
+    </div>
+
+<!--    <footer class="footer">-->
+<!--        This invoice is generated automatically.-->
+<!--    </footer>-->
+
+    <footer class="page-footer font-small blue">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright, This invoice is generated automatically.
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+
+</div>
+</body>
+</html>
